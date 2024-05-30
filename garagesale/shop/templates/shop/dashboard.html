@@ -1,0 +1,36 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+    <div id='sidebar'>
+        <h3>Orders</h3>
+        <ul>
+            <li {% if filter == "open" %}class="selected"{% endif %}>
+                <a href="{% url 'shop:order_list' %}">Open</a>
+            </li>
+            <li {% if filter == "settled" %}class="selected"{% endif %}>
+                <a href="{% url 'shop:order_list' 'settled' %}">Settled</a>
+            </li>
+            <li {% if filter == "all" %}class="selected"{% endif %}>
+                <a href="{% url 'shop:order_list' 'all' %}">All</a>
+            </li>
+        </ul>
+        <h3>Products</h3>
+        <ul>
+            <li><a href="{% url 'shop:add_product' %}">Add a product</a></li>
+        </ul>
+    </div>
+    <div id="main" class="order_list">
+        <h1>Dashboard</h1>
+        <h2>{% if filter == 'open' %}Open orders{% elif filter == 'settled' %}Settled orders
+            {% else %}All orders{% endif %}</h2>
+        {% for order in orders %}
+        <div class="item">
+            <a href="{{ order.get_absolute_url }}">{{ order.id }}</a> -- {{ order.created }} -- 
+            {{ order.last_name }} -- {{ order.product }} 
+        </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

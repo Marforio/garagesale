@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}Garage Sale / Vide Grenier{% endblock %}</title>
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div id="header">
+            <ul class="menu">
+                <li> 
+                    <span class="logo"><a href="/garagesale/" class="logo">Garage Sale</a></span>
+                </li>
+                <div class="middle-elements">
+                    <li {% if section == "products" %}class="selected"{% endif %}>
+                        <a href="{% url 'shop:product_list' %}">Products</a>
+                    </li>
+                    <li {% if section == "conditions" %}class="selected"{% endif %}>
+                        <a href="#">Useful info</a>
+                    </li>
+                </div>
+                <li {% if section == "dashboard" %}class="selected"{% endif %}>
+                    <a href={% url "shop:order_list" %}>Admin</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                <li><span class="user">
+                    Hello {{ request.user.first_name.capitalize|default:request.user.username }}
+                    <span class="icon">😃</span>
+                    <a href="{% url "logout" %}">Logout</a>
+                    </span>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div id="content">
+            {%block content%}
+            {%endblock%}
+        </div>
+    </body>
+</html>

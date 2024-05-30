@@ -1,0 +1,24 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}{{ product.name }}{% endblock title %}
+
+{% block content %}
+    <div class="product-detail">
+        {% for image in product.images.all %}
+        <figure>
+            <img src="{% thumbnail image.image 0x200 %}" alt="product.name">
+        </figure>
+        {% endfor %}
+        <h1>{{ product.name }}</h1>
+        <h2>
+            <a href="{{ product.category.get_absolute_url }}">
+                {{ product.category }}
+            </a>
+        </h2>
+        <p class="price">CHF{{product.price}}</p>
+        {{product.description|linebreaks}}
+    </div>
+    <a href="{% url 'shop:product_order' product_id=product.id slug=product.slug %}">Order Product</a>
+{% endblock content %}

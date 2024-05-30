@@ -1,0 +1,14 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Add a product{% endblock title %}
+
+{% block content %}
+    <h1> Add a product </h1>
+    <p>Use the following form to add a product:</p>
+    <form method="post" enctype="multipart/form-data">
+        {{ product_form.as_p }}
+        {{ formset.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Submit"></p>
+    </form>
+{% endblock content %}

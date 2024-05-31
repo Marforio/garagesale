@@ -9,7 +9,8 @@ def product_list(request, category_slug=None):
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
     if category_slug:
-        category = get_object_or_404(Category, slug=category_slug)
+        language = request.LANGUAGE_CODE
+        category = get_object_or_404(Category, translations__language_code=language, translations__slug=category_slug)
         products = products.filter(category=category)
     return render(request, 'shop/product/list.html', {
         'category': category,
@@ -18,12 +19,17 @@ def product_list(request, category_slug=None):
     })
 
 def product_detail(request, product_id, slug):
-    product = get_object_or_404(Product, id=product_id, slug=slug, available=True)
+    language = request.LANGUAGE_CODE
+    categories = Category.objects.all()
+    product = get_object_or_404(Product, id=product_id, translations__language_code=language, translations__slug=slug, available=True)
+    product_category = product.category
     # access the images through product bc the ProductImage object is related
     product_images = product.images.all()  
     return render(request, 'shop/product/detail.html', {
         'product': product,
-        'product_images': product_images
+        'product_images': product_images,
+        'categories': categories,
+        'product_category': product_category
         })
 
 def product_order(request, product_id, slug):

@@ -138,8 +138,8 @@ form p input[type="checkbox"] {
 
 #header {
     display: flex; /* Use flexbox for the header */
-    align-items: center; /* Center items vertically */
-    justify-content: space-between; /* Space between logo and menu */
+    flex-direction: column; 
+    align-items: flex-start; 
     padding: 10px 100px;
     font-size: 18px;
 }
@@ -151,19 +151,21 @@ form p input[type="checkbox"] {
     overflow:auto;
 }
 
-#header .logo {
+.logo {
     font-family: 'Ubuntu', sans-serif;
     color:#333;
     font-size:32px;
     margin-right:10%;
     white-space: nowrap;
     display: inline-block;
+    align-self: flex-start;
 }
 /* Reset padding and margin to prevent browser default styles */
 ul.menu, ul.menu li {
     margin: 0;
     padding: 0;
     list-style: none; /* Removes bullet points from list items */
+    align-items: center;
 }
 
 /* Style for the menu container */
@@ -179,16 +181,17 @@ ul.menu li {
 }
 
 #header .menu {
-    display: flex;
-    justify-content: space-between; /* Keep the logo on the left and admin on the right */
-    align-items: center;
     width: 100%;
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 
 #header .menu li {
-    display: flex; /* Use flexbox for the list items */
-    align-items: center; 
+    margin: 0 10px;
 }
 
 .middle-elements {
@@ -350,26 +353,27 @@ ul.errorlist {
 }
 
 .languages {
-   float:right;
-   padding-top:4px;
-   font-size:14px;
+    margin-left: auto;
+    padding-top:4px;
+    font-size:14px;
+    display: flex;
+    flex-direction: row;
 }
 
 .languages ul {
     list-style:none;
     margin:0;
     padding:0;
-    float:left;
+    display: flex;
+    flex-direction: row;
 }
 
 .languages ul li {
-    float:left;
-    margin:0 0 0 10px;
+    margin-left: 10px;
     font-size:14px;
 }
 
 .languages p {
-    float:left;
     margin:0;
 }
 

@@ -1,23 +1,37 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>{% block title %}Garage Sale / Vide Grenier{% endblock %}</title>
+        <title>{% block title %}{% trans "Garage Sale" %}{% endblock %}</title>
         <link href="{% static 'css/base.css' %}" rel="stylesheet">
     </head>
     <body>
         <div id="header">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            <div class="languages">
+                <p>{% trans "Language" %}:</p>
+                <ul class="languages">
+                    {% for language in languages %}
+                    <li>
+                        <a href="/{{ language.code }}/garagesale/"
+                        {% if language.code == LANGUAGE_CODE %} class="selected"{% endif %}>
+                        {{ language.name_local }}</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
             <ul class="menu">
-                <li> 
-                    <span class="logo"><a href="/garagesale/" class="logo">Garage Sale</a></span>
-                </li>
+                <a href="/garagesale/" class="logo">{% trans "Garage Sale" %}</a>
                 <div class="middle-elements">
                     <li {% if section == "products" %}class="selected"{% endif %}>
-                        <a href="{% url 'shop:product_list' %}">Products</a>
+                        <a href="{% url 'shop:product_list' %}">{% trans " Objects for sale" %}</a>
                     </li>
                     <li {% if section == "conditions" %}class="selected"{% endif %}>
-                        <a href="#">Useful info</a>
+                        <a href="#">{% trans "Useful information" %}</a>
                     </li>
                 </div>
                 <li {% if section == "dashboard" %}class="selected"{% endif %}>
@@ -27,7 +41,7 @@
                 <li><span class="user">
                     Hello {{ request.user.first_name.capitalize|default:request.user.username }}
                     <span class="icon">😃</span>
-                    <a href="{% url "logout" %}">Logout</a>
+                    <a href="{% url "logout" %}">{% trans "Logout" %}</a>
                     </span>
                 </li>
                 {% endif %}

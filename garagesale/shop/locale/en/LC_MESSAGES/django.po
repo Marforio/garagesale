@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-30 23:41+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: shop/models.py:77
+msgid "first_name"
+msgstr ""
+
+#: shop/models.py:78
+msgid "last_name"
+msgstr ""
+
+#: shop/models.py:79
+msgid "e-mail"
+msgstr ""
+
+#: shop/models.py:80
+msgid "phone"
+msgstr ""
+
+#: shop/models.py:81
+msgid "address"
+msgstr ""
+
+#: shop/models.py:82
+msgid "comment"
+msgstr ""
+
+#: shop/templates/shop/base.html:7 shop/templates/shop/base.html:12
+msgid "Garage Sale"
+msgstr ""
+
+#: shop/templates/shop/base.html:17
+msgid "Language"
+msgstr ""
+
+#: shop/templates/shop/base.html:31
+msgid " Objects for sale"
+msgstr ""
+
+#: shop/templates/shop/base.html:34
+msgid "Useful information"
+msgstr ""
+
+#: shop/templates/shop/base.html:44
+msgid "Logout"
+msgstr ""
+
+#: shop/templates/shop/product/detail.html:24
+msgid "Reserve this product"
+msgstr ""
+
+#: shop/templates/shop/product/list.html:7
+#: shop/templates/shop/product/list.html:25
+msgid "For sale"
+msgstr ""
+
+#: shop/templates/shop/product/list.html:12
+msgid "Categories"
+msgstr ""
+
+#: shop/templates/shop/product/list.html:15
+msgid "All"
+msgstr ""
+
+#: shop/templates/shop/product/order.html:6
+#: shop/templates/shop/product/order.html:11
+msgid "Your Order"
+msgstr ""
+
+#: shop/templates/shop/product/order.html:9
+msgid "Checkout"
+msgstr ""
+
+#: shop/templates/shop/product/success.html:5
+#: shop/templates/shop/product/success.html:9
+msgid "Thank you"
+msgstr ""
+
+#: shop/templates/shop/product/success.html:10
+msgid ""
+"Your order has been successfully completed. We will contact you shortly by "
+"phone or email."
+msgstr ""

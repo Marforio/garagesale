@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop.apps.ShopConfig',
     'easy_thumbnails',
+    'parler',
+    'rosetta',
 ]
 
 MIDDLEWARE = [
@@ -110,12 +112,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGES = [
-    ('en', _('English')),
     ('de', _('German')),
-    ('fr', _('French'))
+    ('fr', _('French')),
+    ('en', _('English')),
+    
 ]
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'de'
 
 TIME_ZONE = 'UTC'
 
@@ -128,7 +131,7 @@ PARLER_LANGUAGES = {
         {'code': 'de'},
     ),
     'default': {
-        'fallback': 'en',
+        'fallback': 'de',
         'hide_untranslated': False,
     }
 }

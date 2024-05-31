@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
+from parler.models import TranslatableModel, TranslatedFields
 import os
 import uuid
 
@@ -9,15 +11,17 @@ def product_image_upload_to(instance, filename):
     return os.path.join('product_images', str(instance.product.id), filename)
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True)
+class Category(TranslatableModel):
+    translations = TranslatedFields(
+        name = models.CharField(max_length=200),
+        slug = models.SlugField(max_length=200, unique=True)
+    )
 
     class Meta:
-        ordering = ['name']
-        indexes = [
-                models.Index(fields=['name']),
-                ]
+        #ordering = ['name']    >> does not work with TranslatableModel
+        #indexes = [
+        #        models.Index(fields=['name']),
+        #        ]
         verbose_name = 'category'
         verbose_name_plural = 'categories'
 
@@ -28,21 +32,23 @@ class Category(models.Model):
         return reverse("shop:product_list_by_category", args=[self.slug])
     
     
-class Product(models.Model):
+class Product(TranslatableModel):
+    translations = TranslatedFields(
+        name = models.CharField(max_length=200),
+        slug = models.SlugField(max_length=200),
+        description = models.TextField(blank=True)
+    )
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200)
-    description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['name']
+        #ordering = ['name']
         indexes = [
-            models.Index(fields=['id', 'slug']),
-            models.Index(fields=['name']),
+            #models.Index(fields=['id', 'slug']),
+            #models.Index(fields=['name']),
             models.Index(fields=['-created']),
         ]
 
@@ -71,14 +77,16 @@ class ProductImage(models.Model):
     class Meta:
         ordering = ['-is_cover', 'id']  # Ensures cover image appears first if queried
 
-class Order(models.Model):
+class Order(TranslatableModel):
+    translations = TranslatedFields(
+        first_name = models.CharField(_('first_name'), max_length=50),
+        last_name = models.CharField(_('last_name'), max_length=50),
+        email = models.EmailField(_('e-mail')),
+        phone = models.CharField(_('phone'), max_length=15),
+        address = models.CharField(_('address'), max_length=250),
+        comment = models.TextField(_('comment'), max_length=500)
+    )
     product = models.ForeignKey(Product, related_name='order', on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField()
-    phone = models.CharField(max_length=15)
-    address = models.CharField(max_length=250)
-    comment = models.TextField(max_length=500)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     settled = models.BooleanField(default=False)
